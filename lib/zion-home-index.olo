@@ -1,0 +1,5 @@
+<% __render__ = require 'markdown' %>
+
+# Welcome to Zion
+
+This is your first document

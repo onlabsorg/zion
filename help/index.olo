@@ -1,0 +1,10 @@
+<% __render__ = require 'markdown' %>
+
+# Zion
+Zion is an [olowiki](https://github.com/onlabsorg/olowiki/blob/master/README.md)
+static installation. It containis a public library (under `/lib`) and a home
+folder (`/home`) that is stored in your browser. You can use it to create your
+personal documents.
+
+<% import '/.wiki/help/index' %>
+
