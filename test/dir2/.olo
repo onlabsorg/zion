@@ -1,6 +1,0 @@
-<% __render__ = require 'markdown' %>
-# doc at <% __path__ %>
-
-
-<% __title__ = "Custom doc title" %>
-xxxx
