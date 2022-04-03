@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         await initHomeStore(homeStore);
     }
     
-    olo.zion = Wiki('#app', { 
+    olo.zion = await Wiki('#app', { 
         
         appName: "Zion",
         
