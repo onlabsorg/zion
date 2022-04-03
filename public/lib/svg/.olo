@@ -1,0 +1,10 @@
+<% __render__ = require 'markdown' %>
+
+
+svg library
+================================================================================
+
+This is <% definition: `a library containing a bunch of functions that help you 
+create svg images in your olo-docs.` %>
+
+**Work in progress ...**

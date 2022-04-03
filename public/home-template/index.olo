@@ -2,4 +2,10 @@
 
 # Welcome to Zion
 
-This is your first document
+This is your first zion olo-doc. It is stored in this browser, therefore you
+have complete ownership on it.
+
+Read the [documentation]  and start editing this document and create other
+documents.
+
+[documentation]: #<% __path__ %>/../../help/index
