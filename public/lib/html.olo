@@ -1,0 +1,134 @@
+<% __render__ = require 'markdown' %>
+
+
+
+html
+================================================================================
+
+This is an <% _logline: `olo-doc exposing a collection of functions for creating
+generic HTML markup` %>.
+
+
+
+html.element
+--------------------------------------------------------------------------------
+The `element` function creates a generic HTML element markup.
+
+
+```
+element: Text tag -> Text attr -> (Text child, Text child, ...) -> Text markup
+```
+
+* `tag` is the HTML tag (e.g. `"div"`, `"a"`, etc.)
+* `attr` is a string of attributes (e.g. `'id="my-element" class="cool"'); the
+  `html.core.attrs function lets you create such strings from a namespace
+* `child` is a child markup which can (but doesn't have to) be built by 
+  using the element function again
+
+<% element = tag -> attr -> children -> 
+        `<${tag} ${attr}>${children}</${tag}>` %>
+        
+The following example ...
+
+```
+<<% '%' %>
+    p = element 'p',
+    red_p = p 'style="color:red"',
+    u = element 'u' '',
+    red_p ( 'This is a red ' , u 'paragraph' )
+<% '%' %>>
+```
+... renders to:
+
+<% {    
+        p = element 'p',
+        red_p = p 'style="color:red"',
+        u = element 'u' ''
+    }.( red_p ( 'This is a red ' , u 'paragraph' ) )
+%>
+
+
+
+html.attr
+--------------------------------------------------------------------------------
+
+The `attr` function creates an HTML attributes string given the attributes as
+namespace. Underscores in attribute names will be converted to dashes.
+
+<% 
+    attr = ns -> {
+        underscore_to_dash: s -> (dom s => i -> s i == '_' ? '-' ; s i),
+        name_value_pair: name -> `${underscore_to_dash name}="${ns name}" `
+    }.( str(dom ns => name_value_pair) )
+%>
+
+For example, the following expression ...
+
+```
+<<% '%' %>
+    attr {id:"my-element", custom_attr:"cool"}
+<% '%' %>>
+```
+... resolves to `'<% attr {id:"my-elemexent", custom_attr:"cool"} %>'`
+
+
+
+html.a
+--------------------------------------------------------------------------------
+
+The `a` function creates an HTML anchor element `<a>`, given an URL and a 
+content:
+
+`a: Text url -> (Text child1, Text child2, ...) -> Text a_markup`
+
+<% 
+    a = url -> children -> element 'a' (attr {href:url}) children
+%>
+
+For example, the following expression ...
+
+```
+<<% '%' %>
+    a "https://www.wikipedia.org" "Wikipedia"
+<% '%' %>>
+```
+... renders to: <% a "https://www.wikipedia.org" "Wikipedia" %>
+
+
+
+lists
+--------------------------------------------------------------------------------
+
+The following list-related elements are available:
+
+* `ul: (Text item1, Text item2, ...) -> Text list_elt`: unordered list
+* `ol: (Text item1, Text item2, ...) -> Text list_elt`: ordered list
+* `li: Text content -> Text list_item_elt`: list item
+
+<% ul = items -> element 'ul' {} items %>
+<% ol = items -> element 'ol' {} items %>
+<% li = text -> element 'li' {} text %>
+
+For example, the following expression ...
+
+```
+<<% '%' %>
+    ul (
+        li "Buy the milk",
+        li "Clean the kitchen",
+        li "Go to the yoga lesson"
+    )
+<% '%' %>>
+```
+... resolves to:
+<%
+    ul (
+        li "Buy the milk",
+        li "Clean the kitchen",
+        li "Go to the yoga lesson"
+    )
+%>
+
+
+
+

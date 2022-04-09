@@ -1,11 +1,145 @@
 <% __render__ = require 'markdown' %>
 
-# Welcome to Zion
+Welcome to Zion! 
+================================================================================
 
-This is your first zion olo-doc. It is stored in this browser, therefore you
-have complete ownership on it.
+This is your zion home page; it is stored in this browser, therefore you have 
+complete ownership on it, as well as on all the other documents you may want
+to create.
 
-Read the [documentation]  and start editing this document and create other
-documents.
 
-[documentation]: #<% __path__ %>/../../help/index
+
+Get started
+--------------------------------------------------------------------------------
+
+
+### 1) Edit this document
+
+In order to edit this document, press `CTRL-ENTER` or click on the edit command
+in the righ-side menu. You will enter in edit mode, where a text editor allows
+you to change the content of this document.
+
+Add some content (any text you want), then press again `CTRL-ENTER` or click on
+the render command in the right-side menu. This will bring you back to the view
+mode, where the new content of you document will be rendered.
+
+Finally press `CTRL-S` or click on the save icon in the righ-side menu to save
+your changes in the browser storage. 
+
+> Notice that, since this document is stored locally in this browser, if you 
+> open zion in another browser, you will not see your canges. Until we find a 
+> better solution, synchronizing your documents should be done manually; this 
+> is the price to pay for total ownership of your documents.
+
+
+### 2) Create new documents
+
+In order to create a new document, change the url hash to the path of the
+document you want to create. For example change the hash (which should
+currently be `#/home/index`) to `#/home/my-first-folder/my-first-doc`. Once you
+hit enter, a new empty document shoul appear. Switch to edit mode (`CTRL-ENTER`),
+add some content, switch back to view mode (`CTRL-ENTER` again) ans save the
+document (`CTRL-S`).
+
+Congratulations, you created your first zion document! The navigation pane
+(left side of the user interface) should now show a new folder named 
+`my-first-folder` and, inside it, a new document named `my-first-doc`.
+
+A shortcut for creating a new document inside a folder is to click on the
+`New` command contained in the folder context menu, accessible via the three 
+dots next to the folder name.
+
+
+### 3) Use inline expressions
+
+Any text enclosed between `<<%'%'%>` and `<%'%'%>>` is interpreted as a [swan]
+expression, evaluated and rendered in the document. For example, the text
+`I am <<%'%'%> 18 + 7 <%'%'%>> years old` will be rendered to `I am 25 years
+old`.
+
+Assignment operations help you label data and reuse them across your document.
+For example you coul define `<<%'%'%> age = 18 + 7 <%'%'%>>` somewhere in your
+document and use it after as follows: `I am <<%'%'%> age <%'%'%>> years old`.
+
+> The result of any assignment operations (`=` operator) returns an empty tuple
+> `()` which renders to an empty string. Any assignment expression, therefore, 
+> will not produce any visible output in your document. At the contrary, the
+> labelling operation (`:` operator) while stil mapping a value to a name, 
+> returns the value instead. Therefore `<<%'%'%> age = 18 + 7 <%'%'%>>` will
+> not render to any text, while `<<%'%'%> age : 18 + 7 <%'%'%>>` will render
+> to `25`.
+
+The inline expression capabilities go beyond just numerical computations and
+assignmnts: the [swan] language features, among other things, text manipulation,
+data structures, functions, conditional expressions, recursion, etc.
+
+
+### 4) Import other documents
+
+Any document can import another document by using the `import` function in an
+inline expression. The `import` function takes a document path as argument and
+returns the document namespace, giving you access to both the document rendered
+text and all the names defined in that document (variables or functions).
+
+For example, create the following document at `/home/my-first-folder/tools`:
+
+```
+This document contains some data and functions.
+<<%'%'%> author = "Satoshi" <%'%'%>>
+<<%'%'%> double = x -> 2*x <%'%'%>>
+```
+
+Then create any other document and add the following content to it:
+
+```
+<<%'%'%> tools = import '/home/my-first-folder/tools' <%'%'%>>
+According to <<%'%'%> tools.author <%'%'%>>, 2*3 is <<%'%'%> tools.double(3) <%'%'%>>.
+```
+
+The added content will render to `According to Satoshi, 2*3 is 6.`, where the
+name `Satoshi` and the tunction to calculate the double of 3 have been imported
+from the `/home/my-first-folder/tools` document and reused. Furthermore, the
+imported namespace `tools` stringifies to the entire content of the imported
+document, therefore the expression `<<%'%'%> tools <%'%'%>>` corresponds to
+including the document text in your document.
+
+Zion comes with a builtin [library](#/lib/index) of documents containing many
+useful functions for buiding your olo-docs.
+
+
+### 5) Write your document in markdown
+
+If you want to write your documents in [markdown](https://www.markdownguide.org/)
+instead of using plain HTML, all you need to do is adding the following swan 
+expression anywhere in your source:
+
+```
+<<%'%'%> __render__ = require 'markdown' <%'%'%>>
+```
+
+> The `__render__` variable is a function that takes the rendered source (i.e.
+> the text obtained after evaluating all the inline expressions) and decorates
+> it before rendering it in the browser. The `require 'markdown'` function, in
+> particular, is a function that takes a markdown text and returns the
+> corresponding HTML.
+
+
+
+
+Learn More
+--------------------------------------------------------------------------------
+
+You can read the following documents to learn more about zion and the 
+OnLabs.org project:
+
+* Read the [zion documentation], also accessible via the bottom-right button
+* Read the [olowiki documentation]
+* Learn how to write [olo-docs]
+* Learn the [swan] language used to write the olo-docs inline expressions
+
+
+  
+[zion documentation]: #<% __path__ %>/../../help/index
+[olowiki documentation]: #http://raw.githubusercontent.com/onlabsorg/olowiki/master/dist/.wiki/help/index.olo
+[olo-docs]: https://github.com/onlabsorg/olojs/blob/master/docs/document.md
+[swan]: https://github.com/onlabsorg/swan-js/blob/main/docs/swan.md

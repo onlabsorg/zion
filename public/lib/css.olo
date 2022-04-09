@@ -1,0 +1,64 @@
+<% __render__ = require 'markdown' %>
+<% _html = import './html' %>
+
+
+
+css
+================================================================================
+
+This is an <% _logline: `olo-doc exposing a collection of functions for creating
+generic CSS styles` %>.
+
+
+
+css.style
+--------------------------------------------------------------------------------
+The `style` function is just a shortcut for `html.element 'style' ''`. It
+takes the css rules as children.
+
+```
+style: (Text rule, Text rule, ...) -> Text style_element
+```
+
+<% style = rules -> _html.element 'style' '' rules %>
+
+For example, the following expression ...
+```
+<<% '%' %>
+    style("rule bla ... ", "rule bla bla ... ")
+<% '%' %>>
+
+```
+... renders to:
+```
+<% style("rule bla ... ", "rule bla bla ... ") %>
+```
+
+
+
+css.rule
+--------------------------------------------------------------------------------
+The `rule` function creates a CSS ruleset given a CSS selector and a namespace
+of property-value pairs. Underscores in property names are converted to dashes.
+
+```
+rule: Text selector -> Namespace declarations -> Text ruleset
+```
+
+<% 
+    rule = selector -> declarations -> {
+        underscore_to_dash: s -> (dom s => i -> s i == '_' ? '-' ; s i),
+        prop_value_pair: name -> `${underscore_to_dash name}:${declarations name}; `
+    }.( str(selector, ' {', dom declarations => prop_value_pair, '} ') )
+%>
+
+For example, the following expression ...
+```
+<<% '%' %>
+    rule "div.cool" {background_color:"blue", color:"red"}
+<% '%' %>>
+```
+... renders to:
+```
+<% rule "div.cool" {background_color:"blue", color:"red"} %>
+```
