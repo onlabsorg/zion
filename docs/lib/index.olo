@@ -1,4 +1,5 @@
 <% __render__ = require 'markdown' %>
+<% components = import './components' %>
 
 
 # Zion Library
@@ -6,4 +7,21 @@
 The zion library is a collection of reusable olo-docs content. It currently
 included the following sub-libraries:
 
-<% import './toc' %>
+<% _toc: components.toc __path__ ('html', 'css', 'components') %>
+
+If, for example, you want to use the `html` library in your zion document, you
+can just import it as follows:
+
+```
+<<%'%'%> html = import "/lib/html" <%'%'%>>
+```
+
+The zion library is not only available within zion, but it can be accessed
+over http from external documents (e.g. another olowiki implementation, or
+a local stilo repo or just a custom olojs store). For example, importing the
+`html` library from an external document looks like this:
+
+```
+<<%'%'%> html = import "http://zion.onlabs.org/lib/html.olo" <%'%'%>>
+```
+

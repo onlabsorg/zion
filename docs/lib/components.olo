@@ -1,0 +1,39 @@
+<% __render__ = require 'markdown' %>
+<% debug = require 'debug' %>
+<% html = import './html' %>
+
+
+
+Components
+================================================================================
+
+This is a <% _logline: `collection of functions for creating commonly used
+document components` %>.
+
+
+
+components.toc
+--------------------------------------------------------------------------------
+
+<% toc = base_path -> paths -> {
+
+    base_path: base_path,
+    
+    paths: paths,
+    
+    full_paths: paths => path -> `${base_path}/../${path}`,
+    
+    document: i -> import( [full_paths](i) ),
+    
+    logline: i -> (document i '_logline') ; ([paths](i)),
+    
+    item: i -> html.li (html.a `#${[full_paths](i)}` `${[paths](i)}: `, logline i),
+    
+    map: fn -> (dom [paths] => i -> fn i),
+    
+    __str__: this -> html.ul (map item)
+    
+} %>
+
+<% toc __path__ ('html', 'css') %>
+

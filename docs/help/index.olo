@@ -5,7 +5,7 @@ Zion Documentation
 
 Zion is an [olowiki](https://github.com/onlabsorg/olowiki/blob/master/README.md) 
 implementation that is served as a static app and stores your olo-docs locally
-in the browser. Except for this feature, zion works exactly the same was as 
+in the browser. Except for this feature, zion works exactly the same way as 
 olowiki and if you are already an olowiki user, you can get started immediately 
 with zion. If instead you don't know how olowiki works yet, you can check the
 following documentation out:
@@ -17,11 +17,16 @@ following documentation out:
 Zion gives you the possibility to use olowiki without any installation, while
 keeping complete ownership of your olo-docs (which are stored in your browser, 
 not on someone else server). Besides that, zion aims also to create a shared 
-library of olo-docs that you can reuse in your documents via 
-`import http://zion.onlabs.org/lib/path/to/doc`. The libraries currently 
-available are listed below:
+[library](#<% __path__ %>/../../lib/index) of olo-docs that you can reuse in 
+your documents via 
 
-<% import '../lib/toc' %>
+```
+<<%'%'%> lib_doc = import "http://zion.onlabs.org/lib/path/to/lib_doc" <%'%'%>>
+```
+
+The libraries currently available are listed below:
+
+<% import '../lib/index' '_toc' %>
 
   
 [olowiki]: #http://raw.githubusercontent.com/onlabsorg/olowiki/master/dist/.wiki/help/index.olo

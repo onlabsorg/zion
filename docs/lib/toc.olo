@@ -1,4 +1,0 @@
-<% __render__ = require 'markdown' %>
-
-* [html](#<% __path__ %>/../html/): <% import './html/' 'definition' %>
-* [svg](#<% __path__ %>/../svg/): <% import './svg/' 'definition' %>
