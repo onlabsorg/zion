@@ -15,6 +15,13 @@ document components` %>.
 components.toc
 --------------------------------------------------------------------------------
 
+The `toc` function creates a table of content, given a reference path and a
+tuple of documents sub-paths.
+
+```
+toc: Text root_path -> (Text doc1_path, Text doc2_path, ...) -> Namespace t
+```
+
 <% toc = base_path -> paths -> {
 
     base_path: base_path,
@@ -34,6 +41,16 @@ components.toc
     __str__: this -> html.ul (map item)
     
 } %>
+
+The returned namespace stringifies to a HTML list of items, containing a
+link to the document and the document logline. For example, the following
+expression ...
+
+```
+<<%'%'%> toc __path__ ('html', 'css') <%'%'%>> 
+```
+
+... renders to:
 
 <% toc __path__ ('html', 'css') %>
 
