@@ -1,6 +1,6 @@
 <% __render__ = require 'markdown' %>
 
-Zion Documentation
+Zion v<% __zion__.version %> - Documentation
 ================================================================================
 
 Zion is an [olowiki](https://github.com/onlabsorg/olowiki/blob/master/README.md) 

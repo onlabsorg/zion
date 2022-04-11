@@ -23,6 +23,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             'temp:/' : new olo.MemoryStore()
         },
         
+        context: {
+            __zion__: {
+                version: require("../package.json").version
+            }
+        },
+        
         homePath: "/home/index",
         
         helpPath: "/help/index",
