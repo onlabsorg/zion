@@ -8,8 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@onlabsorg/olojs": "^0.22.0",
-    "@onlabsorg/olowiki": "^0.15.3",
+    "@onlabsorg/olojs": "0.23.x",
+    "@onlabsorg/olowiki": "0.16.x",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
     "vuetify": "^2.6.0"
