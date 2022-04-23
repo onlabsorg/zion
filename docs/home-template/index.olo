@@ -37,7 +37,7 @@ your changes in the browser storage.
 In order to create a new document, change the url hash to the path of the
 document you want to create. For example change the hash (which should
 currently be `#/home/index`) to `#/home/my-first-folder/my-first-doc`. Once you
-hit enter, a new empty document shoul appear. Switch to edit mode (`CTRL-ENTER`),
+hit enter, a new empty document will appear. Switch to edit mode (`CTRL-ENTER`),
 add some content, switch back to view mode (`CTRL-ENTER` again) ans save the
 document (`CTRL-S`).
 

@@ -1,6 +1,6 @@
 {
   "name": "zion",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@onlabsorg/olojs": "0.23.x",
-    "@onlabsorg/olowiki": "0.16.x",
+    "@onlabsorg/olowiki": "0.17.x",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
     "vuetify": "^2.6.0"
